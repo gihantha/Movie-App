@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import SearchIcon from "./search.svg";
 import MovieCard from "./MovieCard";
 
+//External API calling
 const API_URL = "http://www.omdbapi.com/?i=tt3896198&apikey=d6638f4c";
 
 const App = () => {
@@ -12,6 +13,8 @@ const App = () => {
   const searchMovies = async () => {
     if (title) {
       const response = await fetch(`${API_URL}&s=${title}}`);
+
+      //convert data into json format
       const data = await response.json();
       setMovies(data.Search);
     } 
@@ -28,7 +31,8 @@ const App = () => {
         />
         <img src={SearchIcon} alt="search" onClick={searchMovies} />
       </div>
-      <div className=""> 
+      <div className="">
+        {/* Displays movies data calling the movie card component*/}
         {movies.map((movie)=> {
              return <MovieCard movie1={movie} />
         })}   
